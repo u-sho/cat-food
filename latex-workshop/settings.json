@@ -1,0 +1,32 @@
+{
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk 🔃",
+      "tools": [
+        "latexmk"
+      ]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-e", // upLaTeX(utf8) + synctex
+        "$latex=q/uplatex -kanji=utf8 -no-guess-input-enc -synctex=1 -interaction=nonstopmode -file-line-error %S/",
+        "-e", // upBibTeX
+        "$bibtex=q/upbibtex %B/",
+        "-e", // biber  utf8
+        "$biber=q/biber --bblencoding=utf8 -u -U --output_safechars %B/",
+        "-e", // upmendex
+        "$makeindex=q/upmendex -o %D %S/",
+        "-e", // dvipdfmx
+        "$dvipdf=q/dvipdfmx -o %D %S/",
+        "-norc", // no use .lattexmkrc
+        "-gg",
+        "-pdfdvi", // not pdftex, use latex + dvipdf
+        "%DOC%"
+      ]
+    }
+  ],
+}
